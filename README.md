@@ -5,6 +5,6 @@
 
 
 thank you reference 
-[jsPDF-AutoTable](https://github.com/simonbengtsson/jsPDF-AutoTable)
+[jsPDF-AutoTable](https://github.com/simonbengtsson/jsPDF-AutoTable)  
 [jsPDF](https://github.com/MrRio/jsPDF)
 
