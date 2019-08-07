@@ -2,3 +2,9 @@
  I tested on jsPDF and jsPDF-AutoTable. 
  To display results from html tables to display reports Export in pdf format, 
  which is unique in that the language is Thai.
+
+
+thank you reference 
+[a link](https://github.com/simonbengtsson/jsPDF-AutoTable)
+[a link](https://github.com/MrRio/jsPDF)
+
