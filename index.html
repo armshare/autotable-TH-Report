@@ -9,6 +9,9 @@
       href="https://fonts.googleapis.com/css?family=Sarabun&display=swap"
       rel="stylesheet"
     />
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <script src="https://unpkg.com/jspdf@1.5.3/dist/jspdf.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.1.4/dist/jspdf.plugin.autotable.js"></script>
@@ -469,11 +472,26 @@
         </tbody>
       </table>
     </div>
+    <div class="col-sm-12">
+      <div class="form-group m-b-10 pull-right" style="margin-top:20px;">
+          <label id="rptPrintSummary" class="control-label" style="font-weight:bold">รวม <font style="color:red" id="rptCount">24</font> รายการ</label>
+      </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="form-group m-b-10 pull-left">
+        <label id="rptPrintBy" class="control-label" style="font-weight:bold">ผู้พิมพ์รายงาน : <font id="rptUser">admin admin</font></label>
+    </div>
+    <div class="form-group m-b-10 pull-right">
+        <label id="rptPrintDate"  class="control-label" style="font-weight:bold">วันที่พิมพ์รายงาน : <font id="rptDate">12/8/2562</font></label>
+    </div>
+</div>
   </body>
   <script src="Sarabun-Bold-bold.js"></script>
   <script src="Sarabun-Medium-normal.js"></script>
   <script>
     var doc = new jsPDF();
+    
+    var totalPagesExp = "{total_pages_count_string}";
     // You can use html:
    
     doc.setFont("Sarabun-Medium"); // set font
@@ -497,11 +515,23 @@
             doc.text(`ชื่อหน่วยงาน : ${ document.getElementById('lblHeader').innerText }`, data.settings.margin.left, 22);
 
             // Footer
-            
+            doc.setFontSize(10);
+  var summaryText = document.getElementById('rptPrintSummary').innerText
+  var summaryPrintBy = document.getElementById('rptPrintBy').innerText 
+  var summaryPrintDate = document.getElementById('rptPrintDate').innerText 
+            // jsPDF 1.4+ uses getWidth, <1.4 uses .width
+            var pageSize = doc.internal.pageSize;
+            var pageHeight = pageSize.height ? pageSize.height : pageSize.getHeight();
+            var pageWidth = pageSize.pageWidth ? pageSize.pageWidth : pageSize.getWidth();
+        //  doc.text(summaryText, data.settings.margin.left, pageHeight - 10);
+            doc.text(summaryText,pageWidth-15, pageHeight  - 10, 'right');
+            doc.text(summaryPrintBy, data.settings.margin.left, pageHeight - 5);
+            doc.text(summaryPrintDate,pageWidth-15, pageHeight  - 5, 'right');
+            console.log('data ' , data)
         },
         margin: {top: 30}
     });
     doc.output("dataurlnewwindow");
-    doc.save("report");
+  //  doc.save("report");
   </script>
 </html>
